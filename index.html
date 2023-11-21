@@ -4,22 +4,33 @@
         <meta charset="utf-8">
         <title>woah... :o</title>
         <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>my first html file</h1>
-        <p>thats so cool..... ;3c</p>
-        <div id="buttons"  style="display: flex">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
+        <div class="top">
+            <div class="title"><p>rock - paper - scissors</p></div>
+            <div class="score">
+                <p id="userScore">USER: 0</p>
+                <p id="compScore">COMP: 0</p>
+            </div>
+            <div class="box">
+                <div class="message">
+                    <p id="roundEnd"></p>
+                    <p id="picked"></p>
+                </div>
+                <div id="gameOver" style="display: none">
+                    <p id="gameOverText"></p>
+                    <button id="playAgain">Play again?</button>
+                </div>
+                <div class="buttons"  style="display: flex">
+                    <button id="rock">Rock</button>
+                    <button id="paper">Paper</button>
+                    <button id="scissors">Scissors</button>
+                </div>
+            </div>
         </div>
-        <div id="gameOver" style="display: none">
-            <p id="gameOverText"></p>
-            <button id="playAgain">Play again?</button>
-        </div>
-        <div class="score">
-            <p id="userScore">USER: 0</p>
-            <p id="compScore">COMP: 0</p>
+        <div class="footer">
+            <p>© Ash 2023</p>
         </div>
         <script></script>
     </body>

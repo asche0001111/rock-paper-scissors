@@ -6,7 +6,7 @@ function compInput() {
 document.addEventListener('DOMContentLoaded', function() {
     let userScore =  0;
     let compScore = 0;
-
+    let compChoiceWord = ''
 
     const userScoreDisplay = document.getElementById('userScore');
     const compScoreDisplay = document.getElementById('compScore');
@@ -22,8 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
         compScore = 0;
         buttons.style.display = 'flex';
         gameOver.style.display = 'none';
+        roundEnd.style.display = 'block';
+        roundEnd.textContent = ''
+        picked.textContent = ''
         updateScores();
     }
+
+
 
     function playRound(playerChoice) {
         let compChoice = compInput();
@@ -32,24 +37,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (compChoice === 1) {
             console.log(`Computer chooses rock.`);
+            compChoiceWord = 'rock';
         } else if (compChoice === 2) {
             console.log(`Computer chooses paper.`);
+            compChoiceWord = 'paper';
         } else if (compChoice === 3) {
-        console.log(`Computer chooses scissors.`);
+            console.log(`Computer chooses scissors.`);
+            compChoiceWord = 'scissors';
+        }
+
+        function roundOver() {
+            picked.textContent = `You choose ${playerChoice}, computer chooses ${compChoiceWord}`
+        }
+        function roundDraw() {
+            roundEnd.textContent = "Draw!";
+        }
+        function roundLost() {
+            roundEnd.textContent = `You lose this round!`;
+        }
+        function roundWon() {
+            roundEnd.textContent = "You win this round!";
         }
 
         if ((playerChoice === "rock" && compChoice === 1) || (playerChoice === "paper" && compChoice === 2) || (playerChoice === "scissors" && compChoice === 3)) {
-            console.log("Draw!");
+            roundDraw();
+            roundOver();
         } else if ((playerChoice === "rock" && compChoice === 2) || (playerChoice === "paper" && compChoice === 3) || (playerChoice === "scissors" && compChoice === 1)) {
-            console.log("You lose this round!");
+            roundLost();
             compScore += 1;
             updateScores();
             scoreCheck();
+            roundOver();
         } else {
-            console.log("You win this round!");
+            roundWon();
             userScore += 1;
             updateScores();
             scoreCheck();
+            roundOver();
         }
     }
 
@@ -83,13 +107,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const gameOver = document.getElementById('gameOver');
     const gameOverText = document.getElementById('gameOverText')
 
-    const buttons = document.getElementById('buttons');
+    const buttons = document.querySelector('.buttons');
     function scoreCheck() {
         if (userScore === 5) {
             buttons.style.display = 'none';
+            roundEnd.style.display = 'none';
             gameOver.style.display = 'flex';
             gameOverText.textContent = 'YOU WON';
         } else if (compScore === 5) {
+            roundEnd.style.display = 'none';
             buttons.style.display = 'none';
             gameOver.style.display = 'flex';
             gameOverText.textContent = 'YOU LOST';
@@ -99,22 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const playAgain = document.querySelector('#playAgain')
     playAgain.addEventListener('click', reset)
 
+    const picked = document.querySelector('#picked')
+    const roundEnd = document.querySelector('#roundEnd')
 
 })
 
-
-/*for (let i = 0; i < 5; i++) {
-    console.log(`User: ${userScore} - Computer: ${compScore}`);
-    playRound();
-}
-
-console.log("GAME OVER")
-console.log(`FINAL SCORE: USER: ${userScore} - COMPUTER: ${compScore}`)
-if (userScore > compScore) {
-    console.log("YOU WIN")
-} else if (userScore === compScore) {
-    console.log("DRAW")
-} else {
-    console.log("YOU LOSE")
-}
-*/
